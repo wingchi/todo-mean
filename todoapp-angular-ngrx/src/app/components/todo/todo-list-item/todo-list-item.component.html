@@ -11,16 +11,16 @@
     <div class="row">
       <ng-container *ngIf="!todo.create && !todo.editing">
         <div class="col-md-3">
-          <p>({todo.title})</p>
+          <p>{{todo.title}}</p>
         </div>
         <div class="col-md-2">
-          <p>({todo.description})</p>
+          <p>{{todo.description}}</p>
         </div>
         <div class="col-md-2">
-          <p>({todo.date | date})</p>
+          <p>{{todo.date | date}}</p>
         </div>
         <div class="col-md-2">
-          <p>({todo.status})</p>
+          <p>{{todo.status}}</p>
         </div>
       </ng-container>
       <ng-container *ngIf="todo.create || todo.editing">
@@ -31,30 +31,30 @@
           <input type="text" class="description" name="description" id="description" [(ngModel)]="todo.description">
         </div>
         <div class="col-md-2">
-          <p>({todo.status})</p>
+          <p>{{todo.status}}</p>
         </div>
       </ng-container>
       <div class="col-md-3 options">
         <ng-container *ngIf="!todo.create && !todo.editing">
           <button class="btn btn-success" *ngIf="todo.status != 'done'" (click)="completeTodo(todo)">
             <i class="fa fa-check"></i>
-          <button>
+          </button>
           <button class="btn btn-primary" (click)="editTodo(todo)">
             <i class="fa fa-pencil"></i>
-          <button>
+          </button>
           <button class="btn btn-danger" (click)="this.deleted.emit(todo)">
             <i class="fa fa-trash"></i>
-          <button>
+          </button>
         </ng-container>
         <ng-container *ngIf="todo.create">
           <button class="btn btn-success" (click)="createTodo(todo)">
             Create
-          <button>
+          </button>
         </ng-container>
         <ng-container *ngIf="todo.editing">
           <button class="btn btn-primary" (click)="editTodoSubmit(todo)">
             Submit
-          <button>
+          </button>
         </ng-container>
       </div>
     </div>

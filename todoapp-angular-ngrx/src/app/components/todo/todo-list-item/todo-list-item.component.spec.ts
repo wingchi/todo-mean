@@ -1,17 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TodoListItemComponent } from './todo-list-item.component';
+import { TodoListItemComponent } from "./todo-list-item.component";
 
-describe('TodoListItemComponent', () => {
+describe("TodoListItemComponent", () => {
   let component: TodoListItemComponent;
   let fixture: ComponentFixture<TodoListItemComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TodoListItemComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [TodoListItemComponent],
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TodoListItemComponent);
@@ -19,7 +20,7 @@ describe('TodoListItemComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

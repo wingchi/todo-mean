@@ -1,138 +1,135 @@
-import Todo from '../../models/todo.model'
-import { initializeTodoState, TodoListState, TodoState } from './todo.state'
-import * as TodoActions from './todo.action'
+import Todo from "../../models/todo.model";
+import { initializeTodoState, TodoListState, TodoState } from "./todo.state";
+import * as TodoActions from "./todo.action";
 
-export type Action = TodoActions.All
+export type Action = TodoActions.All;
 
 const initialTodoStates: TodoState[] = [
   {
     ...Todo.generateMockTodo(),
-    ...initializeTodoState()
-  }
-]
+    ...initializeTodoState(),
+  },
+];
 
 const initialState: TodoListState = {
-  todos: defaultTodoStates,
+  todos: initialTodoStates,
   loading: false,
   pending: 0,
-}
+};
 
 export function TodoReducer(state = initialState, action: Action) {
   switch (action.type) {
-
     case TodoActions.types.GET_TODOS: {
       return {
         ...state,
         loaded: false,
         loading: true,
-      }
+      };
     }
     case TodoActions.types.GET_TODOS_SUCCESS: {
       return {
         ...state,
-        todos: [
-          ...action.payload,
-          defaultTodoStates[0],
-        ],
+        todos: [...action.payload, initialTodoStates[0]],
         loading: false,
-      }
+      };
     }
     case TodoActions.types.CREATE_TODO: {
       return {
         ...state,
         todos: state.todos.map(todo => {
           if (todo._id === action.payload._id) {
-            todo.loading = true
+            todo.loading = true;
           }
-          return todo
-        })
-      }
+          return todo;
+        }),
+      };
     }
     case TodoActions.types.CREATE_TODO_SUCCESS: {
       return {
         ...state,
         todos: [
-          ...state.todos.filter(todo => (todo._id != "new")),
+          ...state.todos.filter(todo => todo._id != "new"),
           {
             ...action.payload,
-            edited: true
+            edited: true,
           },
           {
             ...Todo.generateMockTodo(),
-            ...initializeTodoState()
-          }
-        ]
-      }
+            ...initializeTodoState(),
+          },
+        ],
+      };
     }
     case TodoActions.types.DELETE_TODO: {
       return {
         ...state,
-        ...state.todos.splice(state.todos.indexOf(action.payload), 1) };
-      }
+        ...state.todos.splice(state.todos.indexOf(action.payload), 1),
+      };
     }
     case TodoActions.types.DELETE_TODO_SUCCESS: {
-      return state
+      return state;
     }
     case TodoActions.types.DELETE_TODO_ERROR: {
       return {
         ...state,
-        todos: [
-          ...state.todos,
-          action.payload,
-        ]
-      }
+        todos: [...state.todos, action.payload],
+      };
     }
     case TodoActions.types.UPDATE_TODO: {
       return {
         ...state,
         todos: state.todos.map(todo => {
           if (todo._id === action.payload._id) {
-            todo.loading = true
+            todo.loading = true;
           }
-          return todo
-        })
-      }
+          return todo;
+        }),
+      };
     }
     case TodoActions.types.UPDATE_TODO_SUCCESS: {
-      return modifyTodoState(state, action.payload, {})
+      return modifyTodoState(state, action.payload, {});
     }
     case TodoActions.types.UPDATE_TODO_ERROR: {
       return {
         ...state,
         todos: state.todos.map(todo => {
           if (todo._id === action.payload._id) {
-            todo.error = true
+            todo.error = true;
           }
-          return todo
-        })
-      }
+          return todo;
+        }),
+      };
     }
     case TodoActions.types.COMPLETE_TODO: {
       return {
         ...state,
         todos: state.todos.map(todo => {
           if (todo._id === action.payload._id) {
-            todo.status = "done"
+            todo.status = "done";
           }
-          return todo
-        })
-      }
+          return todo;
+        }),
+      };
     }
     default: {
-      return state
+      return state;
     }
   }
 }
 
-function modifyTodoState(state, newTodo: TodoState, modifications): TodoListState {
+function modifyTodoState(
+  state,
+  newTodo: TodoState,
+  modifications
+): TodoListState {
   return {
     ...state,
     todos: state.todos.map(todo => {
       if (todo._id === newTodo._id) {
-        return { ...t, ...todo, ...modifications }
+        return { ...todo, ...newTodo, ...modifications };
       } else {
-        return todo
+        return todo;
       }
-    })
-  }
+    }),
+  };
 }

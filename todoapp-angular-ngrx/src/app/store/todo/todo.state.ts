@@ -1,18 +1,18 @@
-import Todo from '../../models/todo.model'
+import Todo from "../../models/todo.model";
 
 export interface TodoState extends Todo {
-  loading: boolean
+  loading: boolean;
 
-  editable: boolean
-  edited: boolean
-  editing: boolean
+  editable: boolean;
+  edited: boolean;
+  editing: boolean;
 
-  selected: boolean
-  refreshing: boolean
+  selected: boolean;
+  refreshing: boolean;
 
-  create: boolean
+  create: boolean;
 
-  error: boolean
+  error: boolean;
 }
 
 export const initializeTodoState = () => ({
@@ -28,15 +28,15 @@ export const initializeTodoState = () => ({
   create: true,
 
   error: false,
-})
+});
 
 export interface TodoListState {
-  todos: TodoState[]
-  loading: boolean
-  pending: number
+  todos: TodoState[];
+  loading: boolean;
+  pending: number;
 }
 
 export const initializeTodoListState = () => ({
   loading: false,
   pending: 0,
-})
+});

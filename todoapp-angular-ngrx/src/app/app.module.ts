@@ -1,14 +1,18 @@
+import { TodoEffects } from './store/todo/todo.effect';
+import { StoreModule } from '@ngrx/store';
+import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { EffectsModule } from '@ngrx/effects'
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { TodoListComponent } from './components/todo/todo-list/todo-list.component';
+import { EffectsModule } from '@ngrx/effects';
+import { TodoListItemComponent } from './components/todo/todo-list-item/todo-list-item.component';
 
 import * as TodoReducer from './store/todo/todo.reducer'
-import { TodoEffects } from './store/todo/todo.effect';
-import { TodoListComponent } from './components/todo/todo-list/todo-list.component';
-import { TodoListItemComponent } from './components/todo/todo-list-item/todo-list-item.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +26,7 @@ import { TodoListItemComponent } from './components/todo/todo-list-item/todo-lis
     FormsModule,
     NgbModule.forRoot(),
     StoreModule.forRoot({todos: TodoReducer.TodoReducer}),
-    EffectsModule.forRoot([TodoEffects]),
+    EffectsModule.forRoot([TodoEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
