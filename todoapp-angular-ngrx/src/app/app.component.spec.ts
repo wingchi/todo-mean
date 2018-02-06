@@ -1,7 +1,6 @@
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { TodoService } from './services/todo.service';
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
@@ -18,7 +17,6 @@ describe('AppComponent', () => {
         NgbModule.forRoot()
       ],
       providers: [
-        TodoService
       ]
     }).compileComponents();
   }));
